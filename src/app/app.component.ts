@@ -67,8 +67,8 @@ export class foodIonicApp {
 			// {title: 'Restaurants', component: 'page-restaurant-list', icon: 'home'},
 			 {title: 'Reviews', component: 'page-dish-list', icon: 'camera'},
 			// {title: 'Nearby', component: 'page-nearby', icon: 'compass'},
-			//{title: 'Waiting', component: 'page-category', icon: 'albums'},
-			//{title: 'Latest Orders', component: 'page-orders', icon: 'list-box'},
+			{title: 'Event', component: 'page-event', icon: 'albums'},
+			{title: 'Notice', component: 'page-cart', icon: 'list-box'},
 			// {title: 'Cart', component: 'page-cart', icon: 'cart'},
 			// {title: 'Favorite Restaurants', component: 'page-favorite-list', icon: 'heart'}
 		];

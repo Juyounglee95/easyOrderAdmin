@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {IonicPage, NavController} from 'ionic-angular';
+import {AlertController, IonicPage, NavController} from 'ionic-angular';
 import {RestaurantService} from '../../providers/restaurant-service-mock';
+import * as firebase from "firebase";
 
 @IonicPage({
 	name: 'page-favorite-list',
@@ -13,30 +14,49 @@ import {RestaurantService} from '../../providers/restaurant-service-mock';
 })
 
 export class FavoriteListPage {
-
+	noticeTitle: string;
+	noticeContent: string;
     favorites: Array<any> = [];
+	public  db = firebase.firestore();
+	date : any;
 
-    constructor(public navCtrl: NavController, public service: RestaurantService) {
-        this.getFavorites();
+    constructor(public navCtrl: NavController, public service: RestaurantService, private alertCtrl: AlertController) {
+        // this.getFavorites();
         // console.log(this.favorites);
     }
+	addReview(){
+		var success  = this.addReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+		//console.log("result:",success);
 
-    itemTapped(favorite) {
-		this.navCtrl.push('page-restaurant-detail', {
-			'id': favorite.restaurant.id
+	}
+	async addReviewAsync(){
+		let review = await this._addreview();
+		return review;
+	}
+
+	_addreview():Promise<any>{
+		return new Promise<any>(resolve => {
+			var success = "success";
+			this.date = new Date().toUTCString();
+			var addDoc = this.db.collection('notice').add({
+				title : this.noticeTitle,
+				content : this.noticeContent,
+				timeStamp: this.date
+			}).then(ref=>{
+				resolve(success);
+				console.log('Added document');
+			})
+
+			//   resolve(store);
+		})
+	}
+	presentAlert() {
+		let alert = this.alertCtrl.create({
+			title: "Notice added",
+			buttons: ['OK']
 		});
-    }
-    deleteItem(favorite) {
-        this.service.unfavorite(favorite)
-            .then(() => {
-                this.getFavorites();
-            })
-            .catch(error => alert(JSON.stringify(error)));
-    }
+		alert.present();
+	}
 
-    getFavorites() {
-        this.service.getFavorites()
-            .then(data => this.favorites = data);
-    }
 
 }
