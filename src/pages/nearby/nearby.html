@@ -1,9 +1,12 @@
 <ion-header>
-
-	<ion-navbar>
-		<ion-title>Notice</ion-title>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			<span ion-text class="fw700">Notice</span>
+		</ion-title>
 	</ion-navbar>
-
 </ion-header>
 
 
@@ -12,14 +15,18 @@
 		<ion-item>
 			<ion-label color="primary" >Title</ion-label>
 
-			<ion-input [(ngModel)]="noticeTitle" placeholder="Write Notice"></ion-input>
+			<ion-input [(ngModel)]="noticeTitle" placeholder="Type here"></ion-input>
 		</ion-item>
-		<ion-item>
-			<ion-label color="primary" >Content</ion-label>
+		<!--<ion-item>-->
+			<!--<ion-label color="primary" >Content</ion-label>-->
 
-			<ion-input [(ngModel)]="noticeContent" placeholder="Write Notice"></ion-input>
+			<!--<ion-input [(ngModel)]="noticeContent" placeholder="Type here"></ion-input>-->
+		<!--</ion-item>-->
+		<ion-item>
+			<ion-label color="primary">Content:</ion-label>
+			<ion-textarea rows="7" [(ngModel)]="noticeContent" placeholder="Type here..."></ion-textarea>
 		</ion-item>
 
 	</ion-list>
-	<button ion-button round (click)="addReview()">Edit Notice</button>
+	<button ion-button round (click)="addReview()">Confirm</button>
 </ion-content>

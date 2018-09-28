@@ -25,7 +25,7 @@ export class FavoriteListPage {
         // console.log(this.favorites);
     }
 	addReview(){
-		var success  = this.addReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.push('page-home');}).catch();
+		var success  = this.addReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
 		//console.log("result:",success);
 
 	}
