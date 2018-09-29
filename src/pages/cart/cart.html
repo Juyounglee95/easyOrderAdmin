@@ -10,24 +10,111 @@
 </ion-header>
 
 
-<ion-content margin-top="200px" *ngFor="let review of orders; let id = index">
-	<br><br>
-	<ion-card>
-		<ion-list class="list-full-border">
-			<ion-item  margin-bottom text-wrap>
-				<h2 ion-text class ="fw700">
-					[{{ review.title }}]
-				</h2>
-				<h2 ion-text>
-					{{ review.content }}
-				</h2>
-				<button item-right ion-button small (click)="updateOrder(id)" >Edit</button>
-				<button item-right ion-button small (click)="presentAlert(id)" >Delete</button>
-			</ion-item>
-		</ion-list>
+<ion-content class="lightest-bg">
 
-	</ion-card>
+	<ion-grid no-padding fixed >
+		<ion-row no-padding>
+			<ion-col class="text-center">
+
+
+				<ion-list no-margin *ngFor="let review of orders; let id = index" >
+					<h2 ion-text color="dark" text-center> <strong>Notice List</strong></h2>
+					<ion-grid class="text-center" no-padding>
+						<ion-row>
+							<ion-col class="text-center">
+
+
+								<ion-card>
+									<ion-card-header text-center class="primary-bg">
+										<p ion-text class="text-18x text-white fw300"><strong>{{ review.title }}</strong> </p>
+									</ion-card-header>
+
+									<ion-card-content no-padding>
+
+										<!--<ion-list  no-margin>-->
+										<div ion-item >
+											<p ion-text>{{ review.content }}</p>
+											<!--<h2 ion-text color="dark" class="fw700"><strong>Store: </strong>{{review.store_name}}</h2>-->
+											<!--<h2 ion-text color="dark" class="fw700">Menu: {{ review.menu }} </h2>-->
+											<!--&lt;!&ndash;<h2 ion-text color="dark" class="fw700">Price: {{order.price}}</h2>&ndash;&gt;-->
+											<!--<p ion-text>-->
+												<!--{{ review.content }}-->
+											<!--</p>-->
+											<!--<p ion-text color="primary"> <span class="author text-11x">WHEN {{ review.time }}</span></p>-->
+
+											<!--<ion-badge color="secondary" class="text-1x">-->
+												<!--<ion-icon name="star"></ion-icon>-->
+												<!--{{ review.star }}-->
+											<!--</ion-badge>-->
+
+										</div>
+										<!--</ion-list>-->
+									</ion-card-content>
+									<!--<button item-right ion-button small (click)="editReview()" >Edit Review</button>-->
+									<!--<button item-right ion-button small (click)="presentAlert()" >Delete Review</button>-->
+									<ion-row no-padding>
+										<ion-col text-center>
+											<button  ion-button clear small color="danger" (click)="updateOrder(id)" >
+												<ion-icon name='color-wand'></ion-icon>
+												Edit Notice
+											</button>
+										</ion-col>
+										<ion-col text-center>
+											<button  ion-button clear small color="danger" (click)="presentAlert(id)">
+												<ion-icon name='trash'></ion-icon>
+												Delete Notice
+											</button>
+										</ion-col>
+
+									</ion-row>
+
+
+								</ion-card>
+
+
+
+							</ion-col>
+						</ion-row>
+					</ion-grid>
+
+				</ion-list>
+			</ion-col>
+		</ion-row>
+
+	</ion-grid>
 </ion-content>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<ion-content margin-top="200px" *ngFor="let review of orders; let id = index">-->
+	<!--<br><br>-->
+	<!--<ion-card>-->
+		<!--<ion-list class="list-full-border">-->
+			<!--<ion-item  margin-bottom text-wrap>-->
+				<!--<h2 ion-text class ="fw700">-->
+					<!--[{{ review.title }}]-->
+				<!--</h2>-->
+				<!--<h2 ion-text>-->
+					<!--{{ review.content }}-->
+				<!--</h2>-->
+				<!--<button item-right ion-button small (click)="updateOrder(id)" >Edit</button>-->
+				<!--<button item-right ion-button small (click)="presentAlert(id)" >Delete</button>-->
+			<!--</ion-item>-->
+		<!--</ion-list>-->
+
+	<!--</ion-card>-->
+<!--</ion-content>-->
 
 <ion-footer class="no-padding dark-bg">
 	<ion-grid no-padding fixed>

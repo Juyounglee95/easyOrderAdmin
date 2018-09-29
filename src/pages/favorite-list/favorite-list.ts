@@ -1,8 +1,18 @@
 import {Component} from '@angular/core';
-import {AlertController, IonicPage, NavController} from 'ionic-angular';
+import {
+	IonicPage,
+	ActionSheetController,
+	ActionSheet,
+	NavController,
+	NavParams,
+	ToastController,
+	AlertController, LoadingController
+} from 'ionic-angular';
+import { FormGroup, Validators, FormBuilder } from '@angular/forms';
 import {RestaurantService} from '../../providers/restaurant-service-mock';
-import * as firebase from "firebase";
 
+import leaflet from 'leaflet';
+import * as firebase from "firebase";
 @IonicPage({
 	name: 'page-favorite-list',
 	segment: 'favorites'
@@ -19,13 +29,48 @@ export class FavoriteListPage {
     favorites: Array<any> = [];
 	public  db = firebase.firestore();
 	date : any;
-
-    constructor(public navCtrl: NavController, public service: RestaurantService, private alertCtrl: AlertController) {
+	public onYourRestaurantForm: FormGroup;
+    constructor(public loadingCtrl: LoadingController, public toastCtrl: ToastController, private _fb: FormBuilder,	public navCtrl: NavController, public service: RestaurantService, private alertCtrl: AlertController) {
         // this.getFavorites();
         // console.log(this.favorites);
     }
+	ngOnInit() {
+		this.onYourRestaurantForm = this._fb.group({
+
+			restaurantTitle: ['', Validators.compose([
+				Validators.required
+			])],
+			restaurantAddress: ['', Validators.compose([
+				Validators.required
+			])],
+
+		});
+	}
+	presentToast() {
+		// send booking info
+		let loader = this.loadingCtrl.create({
+			content: "Please wait..."
+		});
+		// show message
+		let toast = this.toastCtrl.create({
+			showCloseButton: true,
+			cssClass: 'profiles-bg',
+			message: 'Your event was registered!',
+			duration: 3000,
+			position: 'bottom'
+		});
+
+		loader.present();
+
+		setTimeout(() => {
+			loader.dismiss();
+			toast.present();
+			// back to home page
+			this.navCtrl.setRoot('page-home');
+		}, 3000)
+	}
 	addReview(){
-		var success  = this.addReviewAsync().then(()=> this.presentAlert()).then(()=>{this.navCtrl.setRoot('page-home');}).catch();
+		var success  = this.addReviewAsync().then(()=> this.presentToast()).catch();
 		//console.log("result:",success);
 
 	}
