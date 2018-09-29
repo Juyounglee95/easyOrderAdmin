@@ -60,5 +60,46 @@ export class EventPage {
 				});
 		})
 	}
+	presentAlert(id) {
+
+		let alert = this.alert.create({
+			title: "Do you really want to delete the event?",
+			buttons: [
+				{
+					text: 'No',
+					handler: () => {
+						console.log('Disagree clicked');
+					}
+				},
+				{
+					text: 'YES',
+					handler: () => {
+						this.deleteReview(id)
+					}
+				}
+			]
+		});
+		alert.present();
+	}
+	deleteReview(id){
+		var orderdoc_id = this.orders[id].timeStamp;
+
+		var reviewRef = this.db.collection('event').where("timeStamp", "==", orderdoc_id).onSnapshot(querySnapshot => {
+			querySnapshot.docChanges.forEach(change => {
+				const reviewid = change.doc.id;
+				this.db.collection('event').doc(reviewid).delete().then(()=>this.presentAlert2()).then(()=>this.navCtrl.setRoot('page-home')).catch(err=> console.log("error"));
+				// do something with foo and fooId
+				//resolve();
+			})
+		})
+	}
+	presentAlert2() {
+
+		let alert = this.alert.create({
+			title: "Deletion is completed",
+			buttons: ["OK"]
+		});
+		alert.present();
+	}
 
 }
