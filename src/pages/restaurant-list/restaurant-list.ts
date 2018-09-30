@@ -21,12 +21,14 @@ export class RestaurantListPage {
     from: string;
     map;
     markersGroup;
-
+	content : any;
+	timeStamp: any;
+	title: any;
     constructor(public navCtrl: NavController, public navParams: NavParams, public service: RestaurantService, public toastCtrl: ToastController, public modalCtrl: ModalController, public config: Config) {
-        this.findAll();
-        this.proptype = this.navParams.get('proptype') || "";
-        this.from = this.navParams.get('from') || "";
-        // console.log(this.proptype);
+		this.timeStamp = this.navParams.get('timeStamp');
+		this.title = this.navParams.get('title');
+        this.content = this.navParams.get('content');
+
     }
 
     openFilterModal() {

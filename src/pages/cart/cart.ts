@@ -91,7 +91,7 @@ export class CartPage {
 	}
 	updateOrder(id) {
 		var orderdoc_id = this.orders[id].timeStamp;
-		this.navCtrl.push('page-nearby', {'content':this.orders[id].content, 'title':this.orders[id].title, 'timeStamp':orderdoc_id});
+		this.navCtrl.push('page-nearby', {'content':this.orders[id].content, 'title':this.orders[id].title, 'timeStamp':this.orders[id].timeStamp});
 	}
 	presentAlert2() {
 
@@ -104,6 +104,11 @@ export class CartPage {
 
 	openCategoryPage() {
       this.navCtrl.push('page-favorite-list');
+  }
+
+  readmore(id){
+  	this.navCtrl.push('page-checkout', {'content': this.orders[id].content,'title':this.orders[id].title, 'timeStamp':this.orders[id].timeStamp
+	});
   }
 
 }

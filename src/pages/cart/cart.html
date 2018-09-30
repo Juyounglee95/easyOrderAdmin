@@ -16,9 +16,9 @@
 		<ion-row no-padding>
 			<ion-col class="text-center">
 
-
+				<h2 ion-text color="dark" text-center> <strong>Notice List</strong></h2>
 				<ion-list no-margin *ngFor="let review of orders; let id = index" >
-					<h2 ion-text color="dark" text-center> <strong>Notice List</strong></h2>
+
 					<ion-grid class="text-center" no-padding>
 						<ion-row>
 							<ion-col class="text-center">
@@ -27,9 +27,10 @@
 								<ion-card>
 									<ion-card-header text-center class="primary-bg">
 										<p ion-text class="text-18x text-white fw300"><strong>{{ review.title }}</strong> </p>
+
 									</ion-card-header>
 
-									<ion-card-content no-padding>
+									<ion-card-content no-padding >
 
 										<!--<ion-list  no-margin>-->
 										<div ion-item >
@@ -46,10 +47,17 @@
 												<!--<ion-icon name="star"></ion-icon>-->
 												<!--{{ review.star }}-->
 											<!--</ion-badge>-->
-
+											<br>
+											<span ion-text class="author text-11x">WHEN {{ review.timeStamp}}</span>
 										</div>
+
 										<!--</ion-list>-->
 									</ion-card-content>
+									<button  ion-button clear small color="danger" (click)="readmore(id)" >
+										<ion-icon name='add'></ion-icon>
+										Read more
+									</button>
+									<hr>
 									<!--<button item-right ion-button small (click)="editReview()" >Edit Review</button>-->
 									<!--<button item-right ion-button small (click)="presentAlert()" >Delete Review</button>-->
 									<ion-row no-padding>

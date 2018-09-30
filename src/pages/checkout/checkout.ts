@@ -19,19 +19,22 @@ export class CheckoutPage {
   paymethods: string = 'creditcard';
   totalVal: number = 0;
   orderNumber: number = Math.floor(Math.random() * 10000);
-
+  content: any;
+  title: any;
+  timeStamp: any;
   constructor(public nav: NavController, public navParams: NavParams, private storage: Storage, public ordersService: OrdersService, public cartService: CartService, public loadingCtrl: LoadingController, public toastCtrl: ToastController) {
-    this.checkoutData = this.navParams.data.orders;
-
-    if (this.checkoutData) {
-	  	this.checkoutData.forEach((val, i) => {
-	  		this.totalVal = this.totalVal + (val.order.price * val.qtd)
-	  	});
-
-	  	this.storage.set('order-' + this.orderNumber, this.checkoutData);
-    } else {
-    	this.nav.setRoot('page-home');
-    }
+    this.content= this.navParams.get("content");
+	this.title = this.navParams.get("title");
+	this.timeStamp = this.navParams.get("timeStamp");
+    // if (this.checkoutData) {
+	//   	this.checkoutData.forEach((val, i) => {
+	//   		this.totalVal = this.totalVal + (val.order.price * val.qtd)
+	//   	});
+	//
+	//   	this.storage.set('order-' + this.orderNumber, this.checkoutData);
+    // } else {
+    // 	this.nav.setRoot('page-home');
+    // }
 
     // console.log(this.checkoutData);
   }
